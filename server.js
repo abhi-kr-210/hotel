@@ -1,11 +1,15 @@
 
 const  express=require("express");
+
 const app=express();
+require('dotenv').config();
 const db=require("./db.js");
 const Person=require("./models/person.js");
 const Menu=require("./models/menu.js");
+
 const bodyparser=require("body-parser");
 app.use(bodyparser.json()); //store object into req.body
+const PORT=process.env.PORT || 3000
 
 
 app.get("/",(req,res)=>{
@@ -14,8 +18,9 @@ app.get("/",(req,res)=>{
 const PersonRoutes=require("./routes/personRoutes.js");
 app.use("/person",PersonRoutes);
 const menuRoutes=require("./routes/menuRoutes.js");
+
 app.use("/menu",menuRoutes);
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log("server is running");
 });
 
